@@ -206,7 +206,7 @@ public class Main implements Delivery {
 			almoco.setNome(nome);
 			almoco.setAcompanhamentos(acompanhamento);
 			almoco.setPreco(preco);
-			almoco.setId_almoco(idAlmoco);
+			almoco.setId(idAlmoco);
 			em.getTransaction().begin();
 			em.persist(almoco);
 			em.getTransaction().commit();

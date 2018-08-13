@@ -11,7 +11,7 @@ public class Almoco {
 	@Id
 	@Column
 	
-	private int id_almoco;
+	private int id;
 	private String nome;
 	private float preco;
 	private String acompanhamentos;
@@ -42,11 +42,11 @@ public class Almoco {
 	public void setAcompanhamentos(String acompanhamentos) {
 		this.acompanhamentos = acompanhamentos;
 	}
-	public int getId_almoco() {
-		return id_almoco;
+	public int getId() {
+		return id;
 	}
-	public void setId_almoco(int id_almoco) {
-		this.id_almoco = id_almoco;
+	public void setId(int id_almoco) {
+		this.id = id_almoco;
 	}
 
 	
