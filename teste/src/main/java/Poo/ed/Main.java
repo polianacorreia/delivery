@@ -1,12 +1,8 @@
 package Poo.ed;
 
-import java.util.ArrayList;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-
 import Exception.AlmocoExistenteException;
 import Exception.BebidaExistenteException;
 import Exception.ClienteExistenteException;

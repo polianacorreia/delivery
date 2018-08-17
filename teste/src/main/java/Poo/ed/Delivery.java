@@ -1,7 +1,5 @@
 package Poo.ed;
 
-import java.util.ArrayList;
-
 import Exception.AlmocoExistenteException;
 import Exception.BebidaExistenteException;
 import Exception.ClienteExistenteException;

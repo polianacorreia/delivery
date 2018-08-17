@@ -1,17 +1,20 @@
 package Poo.ed;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.annotation.Generated;
 import javax.persistence.Column;
 
 @Entity
-
-public class Almoco {
+public class Almoco implements Identificavel{
 	
 	@Id
-	@Column
-	
-	private int id;
+	@GeneratedValue(generator="almoco_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="almoco_seq")
+	private Long id;
 	private String nome;
 	private float preco;
 	private String acompanhamentos;
@@ -42,10 +45,10 @@ public class Almoco {
 	public void setAcompanhamentos(String acompanhamentos) {
 		this.acompanhamentos = acompanhamentos;
 	}
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id_almoco) {
+	public void setId(Long id_almoco) {
 		this.id = id_almoco;
 	}
 
