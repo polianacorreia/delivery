@@ -1,8 +1,6 @@
 package Poo.ed;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -147,7 +145,7 @@ public class MainTest {
 	public void testAddBuscaRemoveAtualizaAlmoco() {
 		Main m = new Main();
 		try {
-			m.addAlmoco("almoco1", "suco", 34, 25);
+			m.addAlmoco("almoco1", "suco", 34l, 25);
 			Almoco almoco = m.buscarAlmoco("almoco1", 34);
 			assertEquals(almoco.getAcompanhamentos(), "suco");
 			assertEquals(almoco.getNome(), "almoco1");

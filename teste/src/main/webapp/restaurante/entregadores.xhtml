@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Gerenciador de Entregadores</title>
+</h:head>
+
+
+<h:body>
+
+<h:form>
+	
+	Nome: <h:inputText  value="#{entregadorBean.entregador.nome}"></h:inputText> 
+	Id: <h:inputText  value="#{entregadorBean.entregador.id}"></h:inputText> 
+	Contato: <h:inputText  value="#{entregadorBean.entregador.contato}"></h:inputText> 
+	 	
+	<h:commandButton value="Cadastrar" action="#{entregadorBean.addEntregador()}" ></h:commandButton>
+	<h:commandButton value="Editar" action="#{entregadorBean.updateEntregador()}" ></h:commandButton>
+	<h:commandButton value="Remover" action="#{entregadorBean.removeEntregador()}" ></h:commandButton>
+	<h:commandButton value="Mostrar" action="#{entregadorBean.mostrarEntregador()}" ></h:commandButton>
+
+</h:form>
+<h:dataTable var="en" value="#{entregadorBean.entregadores}">
+	<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{en.nome}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{en.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Contato</f:facet>
+			<h:outputText value="#{en.contato}" />
+			
+		</h:column>
+</h:dataTable>
+
+
+</h:body>
+
+</html>

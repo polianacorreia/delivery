@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Gerenciador de Pedidos</title>
+</h:head>
+
+
+<h:body>
+
+<h:form>
+	
+	Nome: <h:inputText  value="#{pedidoBean.pedido.nome}"></h:inputText> 
+	FormaPag: <h:inputText  value="#{pedidoBean.pedido.formaPag}"></h:inputText> 
+	Id: <h:inputText  value="#{pedidoBean.pedido.id}"></h:inputText> 
+	QuantPedido: <h:inputText  value="#{pedidoBean.pedido.QuantPedido}"></h:inputText> 
+	 	
+	<h:commandButton value="Cadastrar" action="#{pedidoBean.addPedido()}" ></h:commandButton>
+	<h:commandButton value="Editar" action="#{pedidoBean.updatePedido()}" ></h:commandButton>
+	<h:commandButton value="Remover" action="#{pedidoBean.removePedido()}" ></h:commandButton>
+	<h:commandButton value="Mostrar" action="#{pedidoBean.mostrarPedido()}" ></h:commandButton>
+
+</h:form>
+<h:dataTable var="ped" value="#{pedidoBean.pedidos}">
+	<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{ped.nome}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">FormaPag</f:facet>
+			<h:outputText value="#{ped.formaPag}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{ped.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">QuantPedido</f:facet>
+			<h:outputText value="#{ped.quantPedido}" />
+			
+		</h:column>
+</h:dataTable>
+
+
+</h:body>
+
+</html>

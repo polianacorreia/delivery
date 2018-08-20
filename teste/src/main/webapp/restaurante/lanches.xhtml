@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Gerenciador de Lanches</title>
+</h:head>
+
+
+<h:body>
+
+<h:form>
+	
+	Nome: <h:inputText  value="#{lancheBean.lanche.nome}"></h:inputText> 
+	Tipo: <h:inputText  value="#{lancheBean.lanche.tipo}"></h:inputText>
+	Id: <h:inputText  value="#{lancheBean.lanche.id}"></h:inputText> 
+	Preco: <h:inputText  value="#{lancheBean.lanche.preco}"></h:inputText> 
+	 	
+	<h:commandButton value="Cadastrar" action="#{lancheBean.addLanche()}" ></h:commandButton>
+	<h:commandButton value="Editar" action="#{lancheBean.updateLanche()}" ></h:commandButton>
+	<h:commandButton value="Remover" action="#{lancheBean.removeLanche()}" ></h:commandButton>
+	<h:commandButton value="Mostrar" action="#{lancheBean.mostrarLanche()}" ></h:commandButton>
+
+</h:form>
+<h:dataTable var="lan" value="#{lancheBean.lanches}">
+	<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{lan.nome}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Tipo</f:facet>
+			<h:outputText value="#{lan.tipo}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{lan.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Preco</f:facet>
+			<h:outputText value="#{lan.preco}" />
+			
+		</h:column>
+</h:dataTable>
+
+
+</h:body>
+
+</html>

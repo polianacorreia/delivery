@@ -194,7 +194,7 @@ public class Main implements Delivery {
 	
 	//-------------------------------------------------------------------------------------------------------------- //
 	
-	public void addAlmoco(String nome, String acompanhamento, int idAlmoco, float preco)
+	public void addAlmoco(String nome, String acompanhamento, Long idAlmoco, float preco)
 			throws IdAlmocoNullException, NomeAlmocoNullException, PrecoAlmocoNullException, AlmocoExistenteException {
 		Almoco almoco = em.find(Almoco.class, idAlmoco);
 		if(almoco == null ) {

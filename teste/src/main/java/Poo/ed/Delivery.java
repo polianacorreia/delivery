@@ -83,7 +83,7 @@ public interface Delivery {
 	
 	//Cardapio - Almoco\\
 	
-	public void addAlmoco (String nome, String acompanhamento, int idAlmoco, float preco)
+	public void addAlmoco (String nome, String acompanhamento, Long idAlmoco, float preco)
 			throws IdAlmocoNullException, NomeAlmocoNullException, PrecoAlmocoNullException, AlmocoExistenteException; 
 	
 	public void RemoveAlmoco(int idAlmoco)

@@ -7,7 +7,7 @@ import javax.persistence.Column;
 @Entity
 
 
-public class Cliente {
+public class Cliente implements Identificavel{
 	
 	@Id
 	@Column
@@ -17,6 +17,29 @@ public class Cliente {
 	private int tel_cliente;
 	private String endereco;
 	
+	private String login;
+	private String password;
+	private String grupo;
+	
+	
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getGrupo() {
+		return grupo;
+	}
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
+	}
 	public int getId_cliente() {
 		return id_cliente;
 	}
@@ -40,6 +63,16 @@ public class Cliente {
 	}
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setId(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

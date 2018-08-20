@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Gerenciador de Cardapios</title>
+</h:head>
+
+
+<h:body>
+
+<h:form>
+	
+	Bebidas: <h:inputText  value="#{cardapioBean.cardapio.bebidas}"></h:inputText> 
+	Lanches: <h:inputText  value="#{cardapioBean.cardapio.lanches}"></h:inputText>
+	Sobremesas: <h:inputText  value="#{cardapioBean.cardapio.sobremesas}"></h:inputText> 
+	Almocos: <h:inputText  value="#{cardapioBean.cardapio.almocos}"></h:inputText> 
+	Jantas: <h:inputText  value="#{cardapioBean.cardapio.jantas}"></h:inputText> 
+	Id: <h:inputText  value="#{cardapioBean.cardapio.id}"></h:inputText> 
+	 	
+	<h:commandButton value="Cadastrar" action="#{cardapioBean.addCardapio()}" ></h:commandButton>
+	<h:commandButton value="Editar" action="#{cardapioBean.updateCardapio()}" ></h:commandButton>
+	<h:commandButton value="Remover" action="#{cardapioBean.removeCardapio()}" ></h:commandButton>
+	<h:commandButton value="Mostrar" action="#{cardapioBean.mostrarCardapio()}" ></h:commandButton>
+
+</h:form>
+<h:dataTable var="car" value="#{cardapioBean.cardapios}">
+	<h:column>
+			<f:facet name="header">Bebidas</f:facet>
+			<h:outputText value="#{car.bebidas}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Lanches</f:facet>
+			<h:outputText value="#{car.lanches}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Sobremesas</f:facet>
+			<h:outputText value="#{car.sobremesas}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Almocos</f:facet>
+			<h:outputText value="#{car.almocos}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Jantas</f:facet>
+			<h:outputText value="#{car.jantas}" />
+			
+		</h:column>
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{car.id}" />
+			
+		</h:column>
+</h:dataTable>
+
+
+</h:body>
+
+</html>

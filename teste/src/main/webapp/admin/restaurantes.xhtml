@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Gerenciador de Restaurantes</title>
+</h:head>
+
+
+<h:body>
+
+<h:form>
+	
+	Nome: <h:inputText  value="#{restaBean.resta.nome}"></h:inputText> 
+	Endereço: <h:inputText  value="#{restaBean.resta.endereco}"></h:inputText>
+	Tel: <h:inputText  value="#{restaBean.resta.tel}"></h:inputText> 
+	Id: <h:inputText  value="#{restaBean.resta.id}"></h:inputText> 
+	
+	<h:commandButton value="Cadastrar" action="#{restaBean.addResta()}" ></h:commandButton>
+	<h:commandButton value="Editar" action="#{restaBean.updateResta()}" ></h:commandButton>
+	<h:commandButton value="Remover" action="#{restaBean.removeResta()}" ></h:commandButton>
+	<h:commandButton value="Mostrar" action="#{restaBean.mostrarResta()}" ></h:commandButton>
+
+</h:form>
+<h:dataTable var="res" value="#{restaBean.restaurantes}">
+	<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{res.nome}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Endereco</f:facet>
+			<h:outputText value="#{res.endereco}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Tel</f:facet>
+			<h:outputText value="#{res.tel}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{res.id}" />
+		</h:column>
+</h:dataTable>
+
+
+</h:body>
+
+</html>

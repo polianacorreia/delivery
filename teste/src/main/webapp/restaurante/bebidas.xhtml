@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Gerenciador de Bebidas</title>
+</h:head>
+
+
+<h:body>
+
+<h:form>
+	
+	Nome: <h:inputText  value="#{bebidaBean.bebida.nome}"></h:inputText> 
+	Tipo: <h:inputText  value="#{bebidaBean.bebida.tipo}"></h:inputText>
+	Marca: <h:inputText  value="#{bebidaBean.bebida.marca}"></h:inputText> 
+	Id: <h:inputText  value="#{bebidaBean.bebida.id}"></h:inputText> 
+	Preco: <h:inputText  value="#{bebidaBean.bebida.preco}"></h:inputText> 
+	 	
+	<h:commandButton value="Cadastrar" action="#{bebidaBean.addBebida()}" ></h:commandButton>
+	<h:commandButton value="Editar" action="#{bebidaBean.updateBebida()}" ></h:commandButton>
+	<h:commandButton value="Remover" action="#{bebidaBean.removeBebida()}" ></h:commandButton>
+	<h:commandButton value="Mostrar" action="#{bebidaBean.mostrarBebida()}" ></h:commandButton>
+
+</h:form>
+<h:dataTable var="beb" value="#{bebidaBean.bebidas}">
+	<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{beb.nome}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Tipo</f:facet>
+			<h:outputText value="#{beb.tipo}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Marca</f:facet>
+			<h:outputText value="#{beb.marca}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{beb.id}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Preco</f:facet>
+			<h:outputText value="#{beb.preco}" />
+			
+		</h:column>
+</h:dataTable>
+
+
+</h:body>
+
+</html>

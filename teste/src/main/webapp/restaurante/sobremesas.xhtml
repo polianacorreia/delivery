@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>Gerenciador de Sobremesas</title>
+</h:head>
+
+
+<h:body>
+
+<h:form>
+	
+	Nome: <h:inputText  value="#{sobremesaBean.sobremesa.nome}"></h:inputText> 
+	Tipo: <h:inputText  value="#{sobremesaBean.sobremesa.tipo}"></h:inputText>
+	IdSobremesa: <h:inputText  value="#{sobremesaBean.sobremesa.idSobremesa}"></h:inputText> 
+	Preco: <h:inputText  value="#{sobremesaBean.sobremesa.preco}"></h:inputText> 
+	 	
+	<h:commandButton value="Cadastrar" action="#{sobremesaBean.addSobremesa()}" ></h:commandButton>
+	<h:commandButton value="Editar" action="#{sobremesaBean.updateSobremesa()}" ></h:commandButton>
+	<h:commandButton value="Remover" action="#{sobremesaBean.removeSobremesa()}" ></h:commandButton>
+	<h:commandButton value="Mostrar" action="#{sobremesaBean.mostrarSobremesa()}" ></h:commandButton>
+
+</h:form>
+<h:dataTable var="sob" value="#{sobremesaBean.sobremesas}">
+	<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{sob.nome}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">Tipo</f:facet>
+			<h:outputText value="#{sob.tipo}" />	
+		</h:column>
+		<h:column>
+			<f:facet name="header">IdSobremesa</f:facet>
+			<h:outputText value="#{sob.idSobremesa}" />
+		</h:column>
+		<h:column>
+			<f:facet name="header">Preco</f:facet>
+			<h:outputText value="#{sob.preco}" />
+			
+		</h:column>
+</h:dataTable>
+
+
+</h:body>
+
+</html>
