@@ -34,22 +34,22 @@ public class GarcomBean {
 	
 	public void updateBebida() {
 		for (Garcom gar : garcons) {
-			if(gar.getId_garcom() == garcom.getId_garcom()) {
-				gar.setId_garcom(garcom.getId_garcom());
+			if(gar.getId() == garcom.getId()) {
+				gar.setId(garcom.getId());
 				gar.setNome(garcom.getNome());
 			}
 		}
 	}
 	public void removeGarcom() {
 		for (Garcom gar : garcons) {
-			if(gar.getId_garcom() == garcom.getId_garcom()) {
+			if(gar.getId() == garcom.getId()) {
 				garcons.remove(gar);
 			}
 		}
 	}
 	public void mostrarGarcom() {
 		for (Garcom gar : garcons) {
-			if(gar.getId_garcom() == garcom.getId_garcom()) {
+			if(gar.getId() == garcom.getId()) {
 				System.out.println(gar);
 			}
 		}

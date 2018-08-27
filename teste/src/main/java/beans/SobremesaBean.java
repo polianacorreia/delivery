@@ -34,8 +34,8 @@ public class SobremesaBean {
 	
 	public void updateSobremesa() {
 		for (Sobremesa sob : sobremesas) {
-			if(sob.getIdSobremesa() == sobremesa.getIdSobremesa()) {
-				sob.setIdSobremesa(sobremesa.getIdSobremesa());
+			if(sob.getId() == sobremesa.getId()) {
+				sob.setId(sobremesa.getId());
 				sob.setNome(sobremesa.getNome());
 				sob.setPreco(sobremesa.getPreco());
 				sob.setTipo(sobremesa.getTipo());
@@ -44,14 +44,14 @@ public class SobremesaBean {
 	}
 	public void removeSobremesa() {
 		for (Sobremesa sob : sobremesas) {
-			if(sob.getIdSobremesa() == sobremesa.getIdSobremesa()) {
+			if(sob.getId() == sobremesa.getId()) {
 				sobremesas.remove(sob);
 			}
 		}
 	}
 	public void mostrarSobremesa() {
 		for (Sobremesa sob : sobremesas) {
-			if(sob.getIdSobremesa() == sobremesa.getIdSobremesa()) {
+			if(sob.getId() == sobremesa.getId()) {
 				System.out.println(sob);
 			}
 		}

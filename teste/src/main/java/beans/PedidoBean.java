@@ -34,9 +34,9 @@ public class PedidoBean {
 	
 	public void updatePedido() {
 		for (Pedido ped : pedidos) {
-			if(ped.getId_pedido() == pedido.getId_pedido()) {
+			if(ped.getId() == pedido.getId()) {
 				ped.setForma_pag(pedido.getForma_pag());
-				ped.setId_pedido(pedido.getId_pedido());
+				ped.setId(pedido.getId());
 				ped.setNome_lanche(pedido.getNome_lanche());
 				ped.setQuanti_pedido(pedido.getQuanti_pedido());
 			}
@@ -44,14 +44,14 @@ public class PedidoBean {
 	}
 	public void removePedido() {
 		for (Pedido ped : pedidos) {
-			if(ped.getId_pedido() == pedido.getId_pedido()) {
+			if(ped.getId() == pedido.getId()) {
 				pedidos.remove(ped);
 			}
 		}
 	}
 	public void mostrarPedido() {
 		for (Pedido ped : pedidos) {
-			if(ped.getId_pedido() == pedido.getId_pedido()) {
+			if(ped.getId() == pedido.getId()) {
 				System.out.println(ped);
 			}
 		}

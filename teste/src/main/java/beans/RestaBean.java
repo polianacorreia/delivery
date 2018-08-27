@@ -35,9 +35,9 @@ public class RestaBean {
 	
 	public void updateResta() {
 		for (Resta res : restaurantes) {
-			if(res.getId_resta() == resta.getId_resta()) {
+			if(res.getId() == resta.getId()) {
 				res.setEndereco(resta.getEndereco());
-				res.setId_resta(resta.getId_resta());
+				res.setId(resta.getId());
 				res.setNome(resta.getNome());
 				res.setTel(resta.getTel());
 			}
@@ -45,14 +45,14 @@ public class RestaBean {
 	}
 	public void removeResta() {
 		for (Resta res : restaurantes) {
-			if(res.getId_resta() == resta.getId_resta()) {
+			if(res.getId() == resta.getId()) {
 				restaurantes.remove(res);
 			}
 		}
 	}
 	public void mostrarResta() {
 		for (Resta res : restaurantes) {
-			if(res.getId_resta() == resta.getId_resta()) {
+			if(res.getId() == resta.getId()) {
 				System.out.println(res);
 			}
 		}

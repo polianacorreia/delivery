@@ -1,32 +1,35 @@
 package Poo.ed;
 
-import java.util.ArrayList;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Column;
+import javax.persistence.SequenceGenerator;
+
+import java.util.ArrayList;
 
 @Entity
-
-public class Cardapio {
+public class Cardapio implements Identificavel {
 	
 	@Id
-	@Column
+	@GeneratedValue(generator="cardapio_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="cardapio_seq")
+	private Long id;
 	
 	private ArrayList<Bebida> bebidas;
 	private ArrayList<Lanche> lanches;
 	private ArrayList<Sobremesa> sobremesas;
 	private ArrayList<Almoco> Almocos;
-	private ArrayList<Jantar> Jantas;
-	private int id_cardapio;
+	private ArrayList<Jantar> Jantas;	
 	
+	//Get e Set
 	
-	public int getId_cardapio() {
-		return id_cardapio;
+	public Long getId() {
+		return id;
 	}
-	public void setId_cardapio(int id_cardapio) {
-		this.id_cardapio = id_cardapio;
-	}
-	
+	public void setId(Long id) {
+		this.id = id;
+	}	
 	public ArrayList<Bebida> getBebidas() {
 		return bebidas;
 	}
@@ -58,8 +61,29 @@ public class Cardapio {
 		Jantas = jantas;
 	}
 	
+	//Construtor
 	
+	public Cardapio() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
+	public Cardapio(Long id, ArrayList<Bebida> bebidas, ArrayList<Lanche> lanches, ArrayList<Sobremesa> sobremesas,
+			ArrayList<Almoco> almocos, ArrayList<Jantar> jantas, int id_cardapio) {
+		super();
+		this.id = id;
+		this.bebidas = bebidas;
+		this.lanches = lanches;
+		this.sobremesas = sobremesas;
+		Almocos = almocos;
+		Jantas = jantas;
+	}
 	
-
+	//ToString
+	
+	@Override
+	public String toString() {
+		return "Cardapio [id=" + id + ", bebidas=" + bebidas + ", lanches=" + lanches + ", sobremesas=" + sobremesas
+				+ ", Almocos=" + Almocos + ", Jantas=" + Jantas + "]";
+	}
 }

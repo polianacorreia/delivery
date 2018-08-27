@@ -1,20 +1,25 @@
 package Poo.ed;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Column;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 
 public class Jantar {
 
 	@Id
-	@Column
-
-	private int idJantar;
+	@GeneratedValue(generator="jantar_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="jantar_seq")
+	private Long id;
+	
 	private String nome;
 	private float preco;
 	private String acompanhamentos;
+	
+	//Get e Set
 	
 	public String getNome() {
 		return nome;
@@ -34,14 +39,34 @@ public class Jantar {
 	public void setAcompanhamentos(String acompanhamentos) {
 		this.acompanhamentos = acompanhamentos;
 	}
-	public int getIdJantar() {
-		return idJantar;
+	public Long getId() {
+		return id;
 	}
-	public void setIdJantar(int idJantar) {
-		this.idJantar = idJantar;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
-
+	//Construtor
 	
-
+	public Jantar() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Jantar(Long id, String nome, float preco, String acompanhamentos) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.preco = preco;
+		this.acompanhamentos = acompanhamentos;
+	}
+	
+	//ToString
+	
+	@Override
+	public String toString() {
+		return "Jantar [id=" + id + ", nome=" + nome + ", preco=" + preco + ", acompanhamentos=" + acompanhamentos
+				+ "]";
+	}
+	
 }

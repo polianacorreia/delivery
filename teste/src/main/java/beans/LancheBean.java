@@ -34,21 +34,21 @@ public class LancheBean {
 	
 	public void updateLanche() {
 		for (Lanche lan : lanches) {
-			if(lan.getId_lanche() == lanche.getId_lanche()) {
+			if(lan.getId() == lanche.getId()) {
 				lan.setNome(lanche.getNome());
 			}
 		}
 	}
 	public void removeLanche() {
 		for (Lanche lan : lanches) {
-			if(lan.getId_lanche() == lanche.getId_lanche()) {
+			if(lan.getId() == lanche.getId()) {
 				lanches.remove(lan);
 			}
 		}
 	}
 	public void mostrarLanche() {
 		for (Lanche lan : lanches) {
-			if(lan.getId_lanche() == lanche.getId_lanche()) {
+			if(lan.getId() == lanche.getId()) {
 				System.out.println(lan);
 			}
 		}

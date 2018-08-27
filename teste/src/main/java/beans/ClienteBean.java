@@ -34,24 +34,24 @@ public class ClienteBean {
 	
 	public void updateCliente() {
 		for (Cliente cli : clientes) {
-			if(cli.getId_cliente() == cliente.getId_cliente()) {
+			if(cli.getId() == cliente.getId()) {
 				cli.setEndereco(cliente.getEndereco());
-				cli.setId_cliente(cliente.getId_cliente());
+				cli.setId(cliente.getId());
 				cli.setNome(cliente.getNome());
-				cli.setTel_cliente(cliente.getTel_cliente());
+				cli.setTelCliente(cliente.getTelCliente());
 			}
 		}
 	}
 	public void removeCliente() {
 		for (Cliente cli : clientes) {
-			if(cli.getId_cliente() == cliente.getId_cliente()) {
+			if(cli.getId() == cliente.getId()) {
 				clientes.remove(cli);
 			}
 		}
 	}
 	public void mostrarCliente() {
 		for (Cliente cli : clientes) {
-			if(cli.getId_cliente() == cliente.getId_cliente()) {
+			if(cli.getId() == cliente.getId()) {
 				System.out.println(cli);
 			}
 		}

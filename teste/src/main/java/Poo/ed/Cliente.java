@@ -1,20 +1,21 @@
 package Poo.ed;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Column;
+import javax.persistence.SequenceGenerator;
 
 @Entity
-
-
 public class Cliente implements Identificavel{
 	
 	@Id
-	@Column
+	@GeneratedValue(generator="cliente_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="cliente_seq")
+	private Long id;
 	
-	private int id_cliente;
 	private String nome;
-	private int tel_cliente;
+	private int telCliente;
 	private String endereco;
 	
 	private String login;
@@ -40,11 +41,11 @@ public class Cliente implements Identificavel{
 	public void setGrupo(String grupo) {
 		this.grupo = grupo;
 	}
-	public int getId_cliente() {
-		return id_cliente;
+	public Long getId() {
+		return id;
 	}
-	public void setId_cliente(int id_cliente) {
-		this.id_cliente = id_cliente;
+	public void setId(Long id_cliente) {
+		this.id = id_cliente;
 	}
 	public String getNome() {
 		return nome;
@@ -52,11 +53,11 @@ public class Cliente implements Identificavel{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getTel_cliente() {
-		return tel_cliente;
+	public int getTelCliente() {
+		return telCliente;
 	}
-	public void setTel_cliente(int tel_cliente) {
-		this.tel_cliente = tel_cliente;
+	public void setTelCliente(int tel_cliente) {
+		this.telCliente = tel_cliente;
 	}
 	public String getEndereco() {
 		return endereco;
@@ -64,15 +65,26 @@ public class Cliente implements Identificavel{
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	@Override
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public Cliente() {
+		super();
 	}
+	
+	public Cliente(Long id, String nome, int telCliente, String endereco, String login, String password, String grupo) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.telCliente = telCliente;
+		this.endereco = endereco;
+		this.login = login;
+		this.password = password;
+		this.grupo = grupo;
+	}
+	
 	@Override
-	public void setId(Long id) {
-		// TODO Auto-generated method stub
-		
+	public String toString() {
+		return "Cliente [id=" + id + ", nome=" + nome + ", telCliente=" + telCliente + ", endereco=" + endereco
+				+ ", login=" + login + ", password=" + password + ", grupo=" + grupo + "]";
 	}
 
 }

@@ -34,9 +34,9 @@ public class JantarBean {
 	
 	public void updateJantar() {
 		for (Jantar jan : jantas) {
-			if(jan.getIdJantar() == jantar.getIdJantar()) {
+			if(jan.getId() == jantar.getId()) {
 				jan.setAcompanhamentos(jantar.getAcompanhamentos());
-				jan.setIdJantar(jantar.getIdJantar());
+				jan.setId(jantar.getId());
 				jan.setNome(jantar.getNome());
 				jan.setPreco(jantar.getPreco());
 			}
@@ -44,14 +44,14 @@ public class JantarBean {
 	}
 	public void removeJantar() {
 		for (Jantar jan : jantas) {
-			if(jan.getIdJantar() == jantar.getIdJantar()) {
+			if(jan.getId() == jantar.getId()) {
 				jantas.remove(jan);
 			}
 		}
 	}
 	public void mostrarJantar() {
 		for (Jantar jan : jantas) {
-			if(jan.getIdJantar() == jantar.getIdJantar()) {
+			if(jan.getId() == jantar.getId()) {
 				System.out.println(jan);
 			}
 		}

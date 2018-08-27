@@ -1,26 +1,25 @@
 package Poo.ed;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Column;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 
 public class Entregador {
 	
 	@Id
-	@Column
+	@GeneratedValue(generator="entregador_seq", strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="entregador_seq")
+	private Long id;
 	
-	private int id_entregador;
 	private String contato;
 	private String nome;
 	
-	public int getId_intregador() {
-		return id_entregador;
-	}
-	public void setId_intregador(int id_intregador) {
-		this.id_entregador = id_intregador;
-	}
+	//Get e Set
+
 	public String getContato() {
 		return contato;
 	}
@@ -33,7 +32,32 @@ public class Entregador {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
+	//Construtor
 	
-
+	public Entregador() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Entregador(Long id, String contato, String nome) {
+		super();
+		this.id = id;
+		this.contato = contato;
+		this.nome = nome;
+	}
+	
+	//ToString
+	
+	@Override
+	public String toString() {
+		return "Entregador [id=" + id + ", contato=" + contato + ", nome=" + nome + "]";
+	}
+	
 }

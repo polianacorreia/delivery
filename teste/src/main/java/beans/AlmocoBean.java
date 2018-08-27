@@ -1,5 +1,6 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -12,7 +13,7 @@ import services.AlmocoService;
 
 @Named
 @ViewScoped
-public class AlmocoBean {
+public class AlmocoBean implements Serializable{
 	
 	@Inject
 	private AlmocoService servico;	

@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.annotation.Generated;
-import javax.persistence.Column;
 
 @Entity
 public class Almoco implements Identificavel{
@@ -15,17 +13,19 @@ public class Almoco implements Identificavel{
 	@GeneratedValue(generator="almoco_seq", strategy=GenerationType.SEQUENCE)
 	@SequenceGenerator(name="almoco_seq")
 	private Long id;
+	
 	private String nome;
 	private float preco;
 	private String acompanhamentos;
-	private int almoco;
+	private int quantAlmoco;
 	
+	//Get e Set
 	
-	public int getAlmoco() {
-		return almoco;
+	public int getQuantAlmoco() {
+		return quantAlmoco;
 	}
-	public void setAlmoco(int almoco) {
-		this.almoco = almoco;
+	public void setQuantAlmoco(int quantAlmoco) {
+		this.quantAlmoco = quantAlmoco;
 	}
 	public String getNome() {
 		return nome;
@@ -51,7 +51,29 @@ public class Almoco implements Identificavel{
 	public void setId(Long id_almoco) {
 		this.id = id_almoco;
 	}
-
 	
+	//Construtor
+	
+	public Almoco() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Almoco(Long id, String nome, float preco, String acompanhamentos, int quantAlmoco) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.preco = preco;
+		this.acompanhamentos = acompanhamentos;
+		this.quantAlmoco = quantAlmoco;
+	}
+	
+	//ToString
+	
+	@Override
+	public String toString() {
+		return "Almoco [id=" + id + ", nome=" + nome + ", preco=" + preco + ", acompanhamentos=" + acompanhamentos
+				+ ", quantAlmoco=" + quantAlmoco + "]";
+	}
 
 }

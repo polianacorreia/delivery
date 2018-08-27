@@ -1,19 +1,26 @@
 package beans;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.Collection;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import Poo.ed.Cardapio;
+import services.CardapioService;
 
 @Named
 @ApplicationScoped
-public class CardapioBean {
+public class CardapioBean implements Serializable{
 	
-	private Cardapio cardapio = new Cardapio(); 
+	@Inject
+	private CardapioService service;
 	
-	private List <Cardapio> cardapios = new ArrayList<>();
+	private Cardapio cardapio; 
+	
+	private Collection<Cardapio> cardapios;
 	
 	public Cardapio getCardapio() {
 		return cardapio;
@@ -23,40 +30,42 @@ public class CardapioBean {
 		this.cardapio = cardapio;
 	}
 	
-	public List<Cardapio> getCardapios() {
+	public Collection<Cardapio> getCardapios() {
 		return cardapios;
 	}
 	
-	public void addCardapio() {
-		cardapios.add(getCardapio());
-		cardapio = new Cardapio();
+	@PostConstruct
+	public void init() {
+		cardapio = newEntidade();
+		cardapios = getService().getAll();
 	}
-	
-	public void updateCardapio() {
-		for (Cardapio car : cardapios) {
-			if(car.getId_cardapio() == cardapio.getId_cardapio()) {
-				car.setAlmocos(cardapio.getAlmocos());
-				car.setBebidas(cardapio.getBebidas());
-				car.setId_cardapio(cardapio.getId_cardapio());
-				car.setJantas(cardapio.getJantas());
-				car.setLanches(cardapio.getLanches());
-				car.setSobremesas(cardapio.getSobremesas());
-			}
-		}
+
+	public void remove(Cardapio entidade) {
+		getService().remove(entidade);
+		limpar();
 	}
-	public void removeCardapio() {
-		for (Cardapio car : cardapios) {
-			if(car.getId_cardapio() == cardapio.getId_cardapio()) {
-				cardapios.remove(car);
-			}
-		}
+
+	public void save() {
+		getService().save(cardapio);
+		limpar();
 	}
-	public void mostrarCardapio() {
-		for (Cardapio car : cardapios) {
-			if(car.getId_cardapio() == cardapio.getId_cardapio()) {
-				System.out.println(car);
-			}
-		}
+
+	public void editar(Long id) {
+		this.getCardapio().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		cardapios = getService().getAll();
+		cardapio = newEntidade();
+	}
+
+	protected Cardapio newEntidade() {
+		return new Cardapio();
+	}
+
+	public CardapioService getService() {
+		return service;
 	}
 
 }

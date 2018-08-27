@@ -34,8 +34,8 @@ public class ContaBean {
 	
 	public void updateConta() {
 		for (Conta con : contas) {
-			if(con.getId_conta() == conta.getId_conta()) {
-				con.setId_conta(conta.getId_conta());
+			if(con.getId() == conta.getId()) {
+				con.setId(conta.getId());
 				con.setPedido(conta.getPedido());
 				con.setValor(conta.getValor());
 			}
@@ -43,14 +43,14 @@ public class ContaBean {
 	}
 	public void removeConta() {
 		for (Conta con : contas) {
-			if(con.getId_conta() == conta.getId_conta()) {
+			if(con.getId() == conta.getId()) {
 				contas.remove(con);
 			}
 		}
 	}
 	public void mostrarConta() {
 		for (Conta con : contas) {
-			if(con.getId_conta() == conta.getId_conta()) {
+			if(con.getId() == conta.getId()) {
 				System.out.println(con);
 			}
 		}

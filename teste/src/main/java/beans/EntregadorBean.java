@@ -34,23 +34,23 @@ public class EntregadorBean {
 	
 	public void updateEntregador() {
 		for (Entregador en : entregadores) {
-			if(en.getId_intregador() == entregador.getId_intregador()) {
+			if(en.getId() == entregador.getId()) {
 				en.setContato(entregador.getContato());
-				en.setId_intregador(entregador.getId_intregador());
+				en.setId(entregador.getId());
 				en.setNome(entregador.getNome());
 			}
 		}
 	}
 	public void removeEntregador() {
 		for (Entregador en : entregadores) {
-			if(en.getId_intregador() == entregador.getId_intregador()) {
+			if(en.getId() == entregador.getId()) {
 				entregadores.remove(en);
 			}
 		}
 	}
 	public void mostrarEntregador() {
 		for (Entregador en : entregadores) {
-			if(en.getId_intregador() == entregador.getId_intregador()) {
+			if(en.getId() == entregador.getId()) {
 				System.out.println(en);
 			}
 		}

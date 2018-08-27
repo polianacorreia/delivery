@@ -1,20 +1,26 @@
 package beans;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ApplicationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import Poo.ed.Bebida;
+import services.BebidaService;
 
 @Named
 @ApplicationScoped
-public class BebidaBean {
+public class BebidaBean implements Serializable {
 	
-	private Bebida bebida = new Bebida(); 
+	@Inject
+	private BebidaService service;
 	
-	private List <Bebida> bebidas = new ArrayList<>();
+	private Bebida bebida; 
+	
+	private Collection <Bebida> bebidas;
 	
 	public Bebida getBebida() {
 		return bebida;
@@ -24,39 +30,42 @@ public class BebidaBean {
 		this.bebida = bebida;
 	}
 	
-	public List<Bebida> getBebidas() {
+	public Collection<Bebida> getBebidas() {
 		return bebidas;
 	}
 	
-	public void addBebida() {
-		bebidas.add(getBebida());
-		bebida = new Bebida();
+	@PostConstruct
+	public void init() {
+		bebida = newEntidade();
+		bebidas = getService().getAll();
 	}
-	
-	public void updateBebida() {
-		for (Bebida beb : bebidas) {
-			if(beb.getId_bebida() == bebida.getId_bebida()) {
-				beb.setMarca(bebida.getMarca());
-				beb.setId_bebida(bebida.getId_bebida());
-				beb.setNome(bebida.getNome());
-				beb.setPreco(bebida.getPreco());
-				beb.setTipo(bebida.getTipo());
-			}
-		}
+
+	public void remove(Bebida entidade) {
+		getService().remove(entidade);
+		limpar();
 	}
-	public void removeBebida() {
-		for (Bebida beb : bebidas) {
-			if(beb.getId_bebida() == bebida.getId_bebida()) {
-				bebidas.remove(beb);
-			}
-		}
+
+	public void save() {
+		getService().save(bebida);
+		limpar();
 	}
-	public void mostrarBebida() {
-		for (Bebida beb : bebidas) {
-			if(beb.getId_bebida() == bebida.getId_bebida()) {
-				System.out.println(beb);
-			}
-		}
+
+	public void editar(Long id) {
+		this.getBebida().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		bebidas = getService().getAll();
+		bebida = newEntidade();
+	}
+
+	protected Bebida newEntidade() {
+		return new Bebida();
+	}
+
+	public BebidaService getService() {
+		return service;
 	}
 
 }
