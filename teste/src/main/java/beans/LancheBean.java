@@ -1,57 +1,78 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import Poo.ed.*;
+import services.AlmocoService;
+import services.LancheService;
 
 @Named
 @ViewScoped
-public class LancheBean {
+public class LancheBean implements Serializable{
 	
-	private Lanche lanche = new Lanche(); 
+	@Inject
+	private LancheService servico;	
 	
-	private List <Lanche> lanches = new ArrayList<>();
+	private Lanche lanche; 
 	
-	public Lanche getLanche() {
-		return lanche;
-	}
+	private Collection<Lanche> lanches;
 	
-	public void setLanche(Lanche lanche) {
-		this.lanche = lanche;
-	}
-	
-	public List<Lanche> getLanches() {
+	public Collection<Lanche> getLanches() {
 		return lanches;
 	}
 	
-	public void addLanche() {
-		lanches.add(getLanche());
-		lanche = new Lanche();
+	public LancheService getServico() {
+		return servico;
 	}
-	
-	public void updateLanche() {
-		for (Lanche lan : lanches) {
-			if(lan.getId() == lanche.getId()) {
-				lan.setNome(lanche.getNome());
-			}
-		}
+
+	public Lanche getEntidade() {
+		return lanche;
 	}
-	public void removeLanche() {
-		for (Lanche lan : lanches) {
-			if(lan.getId() == lanche.getId()) {
-				lanches.remove(lan);
-			}
-		}
+
+	public void setEntidade(Lanche entidade) {
+		this.lanche = entidade;
 	}
-	public void mostrarLanche() {
-		for (Lanche lan : lanches) {
-			if(lan.getId() == lanche.getId()) {
-				System.out.println(lan);
-			}
-		}
+
+	public void setLanches(Collection<Lanche> lanches) {
+		this.lanches = lanches;
+	}
+
+	@PostConstruct
+	public void init() {
+		lanche = newEntidade();
+		lanches = getServico().getAll();
+	}
+
+	public void remove(Lanche entidade) {
+		getServico().remove(entidade);
+		limpar();
+	}
+
+	public void save() {
+		getServico().save(lanche);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		lanches = getServico().getAll();
+		lanche = newEntidade();
+	}
+
+	protected Lanche newEntidade() {
+		return new Lanche();
 	}
 
 }

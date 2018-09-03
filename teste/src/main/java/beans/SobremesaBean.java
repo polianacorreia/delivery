@@ -1,60 +1,79 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import Poo.ed.Almoco;
 import Poo.ed.Sobremesa;
+import services.AlmocoService;
+import services.SobremesaService;
 
 @Named
 @ViewScoped
-public class SobremesaBean {
+public class SobremesaBean implements Serializable{
 	
-	private Sobremesa sobremesa = new Sobremesa(); 
+	@Inject
+	private SobremesaService servico;	
 	
-	private List <Sobremesa> sobremesas = new ArrayList<>();
+	private Sobremesa sobremesa; 
 	
-	public Sobremesa getSobremesa() {
-		return sobremesa;
-	}
+	private Collection<Sobremesa> sobremesas;
 	
-	public void setSobremesa(Sobremesa sobremesa) {
-		this.sobremesa = sobremesa;
-	}
-	
-	public List<Sobremesa> getSobremesas() {
+	public Collection<Sobremesa> getSobremesas() {
 		return sobremesas;
 	}
 	
-	public void addSobremesa() {
-		sobremesas.add(getSobremesa());
-		sobremesa = new Sobremesa();
+	public SobremesaService getServico() {
+		return servico;
 	}
-	
-	public void updateSobremesa() {
-		for (Sobremesa sob : sobremesas) {
-			if(sob.getId() == sobremesa.getId()) {
-				sob.setId(sobremesa.getId());
-				sob.setNome(sobremesa.getNome());
-				sob.setPreco(sobremesa.getPreco());
-				sob.setTipo(sobremesa.getTipo());
-			}
-		}
+
+	public Sobremesa getEntidade() {
+		return sobremesa;
 	}
-	public void removeSobremesa() {
-		for (Sobremesa sob : sobremesas) {
-			if(sob.getId() == sobremesa.getId()) {
-				sobremesas.remove(sob);
-			}
-		}
+
+	public void setEntidade(Sobremesa entidade) {
+		this.sobremesa = entidade;
 	}
-	public void mostrarSobremesa() {
-		for (Sobremesa sob : sobremesas) {
-			if(sob.getId() == sobremesa.getId()) {
-				System.out.println(sob);
-			}
-		}
+
+	public void setSobremesas(Collection<Sobremesa> sobremesas) {
+		this.sobremesas = sobremesas;
+	}
+
+	@PostConstruct
+	public void init() {
+		sobremesa = newEntidade();
+		sobremesas = getServico().getAll();
+	}
+
+	public void remove(Sobremesa entidade) {
+		getServico().remove(entidade);
+		limpar();
+	}
+
+	public void save() {
+		getServico().save(sobremesa);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		sobremesas = getServico().getAll();
+		sobremesa = newEntidade();
+	}
+
+	protected Sobremesa newEntidade() {
+		return new Sobremesa();
 	}
 
 }

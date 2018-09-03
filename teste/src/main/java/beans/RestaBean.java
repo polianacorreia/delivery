@@ -1,61 +1,79 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import Poo.ed.Almoco;
 import Poo.ed.Resta;
+import services.AlmocoService;
+import services.RestaService;
 
 @Named
 @ViewScoped
-public class RestaBean {
+public class RestaBean implements Serializable{
 	
-	private Resta resta = new Resta(); 
+	@Inject
+	private RestaService servico;	
 	
-	private List <Resta> restaurantes = new ArrayList<>();
+	private Resta resta; 
 	
-	public Resta getResta() {
+	private Collection<Resta> restas;
+	
+	public Collection<Resta> getRestas() {
+		return restas;
+	}
+	
+	public RestaService getServico() {
+		return servico;
+	}
+
+	public Resta getEntidade() {
 		return resta;
 	}
-	
-	public void setResta(Resta resta) {
-		this.resta = resta;
+
+	public void setEntidade(Resta entidade) {
+		this.resta = entidade;
 	}
-	
-	public List<Resta> getRestaurantes() {
-		return restaurantes;
+
+	public void setRestas(Collection<Resta> restas) {
+		this.restas = restas;
 	}
-	
-	public void addResta() {
-		restaurantes.add(getResta());
-		resta = new Resta();
+
+	@PostConstruct
+	public void init() {
+		resta = newEntidade();
+		restas = getServico().getAll();
 	}
-	
-	public void updateResta() {
-		for (Resta res : restaurantes) {
-			if(res.getId() == resta.getId()) {
-				res.setEndereco(resta.getEndereco());
-				res.setId(resta.getId());
-				res.setNome(resta.getNome());
-				res.setTel(resta.getTel());
-			}
-		}
+
+	public void remove(Resta entidade) {
+		getServico().remove(entidade);
+		limpar();
 	}
-	public void removeResta() {
-		for (Resta res : restaurantes) {
-			if(res.getId() == resta.getId()) {
-				restaurantes.remove(res);
-			}
-		}
+
+	public void save() {
+		getServico().save(resta);
+		limpar();
 	}
-	public void mostrarResta() {
-		for (Resta res : restaurantes) {
-			if(res.getId() == resta.getId()) {
-				System.out.println(res);
-			}
-		}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		restas = getServico().getAll();
+		resta = newEntidade();
+	}
+
+	protected Resta newEntidade() {
+		return new Resta();
 	}
 
 }

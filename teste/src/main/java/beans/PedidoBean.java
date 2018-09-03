@@ -1,60 +1,80 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import Poo.ed.Almoco;
 import Poo.ed.Pedido;
+import services.AlmocoService;
+import services.PedidoService;
 
 @Named
 @ViewScoped
-public class PedidoBean {
+public class PedidoBean implements Serializable{
 	
-	private Pedido pedido = new Pedido(); 
+	@Inject
+	private PedidoService servico;	
 	
-	private List <Pedido> pedidos = new ArrayList<>();
+	private Pedido pedido; 
 	
-	public Pedido getPedido() {
-		return pedido;
-	}
+	private Collection<Pedido> pedidos;
 	
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-	
-	public List<Pedido> getPedidos() {
+	public Collection<Pedido> getPedidos() {
 		return pedidos;
 	}
 	
-	public void addPedido() {
-		pedidos.add(getPedido());
-		pedido = new Pedido();
+	public PedidoService getServico() {
+		return servico;
 	}
-	
-	public void updatePedido() {
-		for (Pedido ped : pedidos) {
-			if(ped.getId() == pedido.getId()) {
-				ped.setForma_pag(pedido.getForma_pag());
-				ped.setId(pedido.getId());
-				ped.setNome_lanche(pedido.getNome_lanche());
-				ped.setQuanti_pedido(pedido.getQuanti_pedido());
-			}
-		}
+
+	public Pedido getEntidade() {
+		return pedido;
 	}
-	public void removePedido() {
-		for (Pedido ped : pedidos) {
-			if(ped.getId() == pedido.getId()) {
-				pedidos.remove(ped);
-			}
-		}
+
+	public void setEntidade(Pedido entidade) {
+		this.pedido = entidade;
 	}
-	public void mostrarPedido() {
-		for (Pedido ped : pedidos) {
-			if(ped.getId() == pedido.getId()) {
-				System.out.println(ped);
-			}
-		}
+
+	public void setPedidos(Collection<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
+
+	@PostConstruct
+	public void init() {
+		pedido = newEntidade();
+		pedidos = getServico().getAll();
+	}
+
+	public void remove(Pedido entidade) {
+		getServico().remove(entidade);
+		limpar();
+	}
+
+	public void save() {
+		getServico().save(pedido);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		pedidos = getServico().getAll();
+		pedido = newEntidade();
+	}
+
+	protected Pedido newEntidade() {
+		return new Pedido();
+	}
+
 
 }

@@ -1,58 +1,82 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import Poo.ed.Almoco;
 import Poo.ed.Cidade;
+import services.AlmocoService;
+import services.CidadeService;
 
 @Named
 @ViewScoped
-public class CidadeBean {
+public class CidadeBean implements Serializable {
 	
-	private Cidade cidade = new Cidade(); 
+	@Inject
+	private CidadeService servico;	
 	
-	private List <Cidade> cidades = new ArrayList<>();
+	private Cidade cidade; 
 	
-	public Cidade getCidade() {
-		return cidade;
-	}
+	private Collection<Cidade> cidades;
 	
-	public void setCidade(Cidade cidade) {
-		this.cidade = cidade;
-	}
-	
-	public List<Cidade> getCidades() {
+	public Collection<Cidade> getCidades() {
 		return cidades;
 	}
 	
-	public void addCidade() {
-		cidades.add(getCidade());
-		cidade = new Cidade();
+	public CidadeService getServico() {
+		return servico;
 	}
 	
-	public void updateCidade() {
-		for (Cidade cid : cidades) {
-			if(cid.getCep() == cidade.getCep()) {
-				cid.setCep(cidade.getCep());
-				cid.setNome(cidade.getNome());
-			}
-		}
+	public Cidade getEntidade() {
+		return cidade;
 	}
-	public void removeCidade() {
-		for (Cidade cid : cidades) {
-			if(cid.getCep() == cidade.getCep()) {
-				cidades.remove(cid);
-			}
-		}
+	
+	public void setEntidade(Cidade entidade) {
+		this.cidade = entidade;
 	}
-	public void mostrarCidade() {
-		for (Cidade cid : cidades) {
-			if(cid.getCep() == cidade.getCep()) {
-				System.out.println(cid);
-			}
-		}
+	
+
+	public void setCidades(Collection<Cidade> cidades) {
+		this.cidades = cidades;
 	}
 
-}
+	@PostConstruct
+	public void init() {
+		cidade = newEntidade();
+		cidades = getServico().getAll();
+	}
+
+	public void remove(Cidade entidade) {
+		getServico().remove(entidade);
+		limpar();
+	}
+
+	public void save() {
+		getServico().save(cidade);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		cidades = getServico().getAll();
+		cidade = newEntidade();
+	}
+
+	protected Cidade newEntidade() {
+		return new Cidade();
+	}
+	}
+	
+	
+

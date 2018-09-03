@@ -1,60 +1,79 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import Poo.ed.Almoco;
 import Poo.ed.Cliente;
+import services.AlmocoService;
+import services.ClienteService;
 
 @Named
 @ViewScoped
-public class ClienteBean {
+public class ClienteBean implements Serializable {
 	
-	private Cliente cliente = new Cliente(); 
+	@Inject
+	private ClienteService servico;
 	
-	private List <Cliente> clientes = new ArrayList<>();
+	private Cliente cliente; 
 	
-	public Cliente getCliente() {
-		return cliente;
-	}
+	private Collection<Cliente> clientes;
 	
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	
-	public List<Cliente> getClientes() {
+	public Collection<Cliente> getClientes() {
 		return clientes;
 	}
 	
-	public void addCliente() {
-		clientes.add(getCliente());
-		cliente = new Cliente();
+	public ClienteService getServico() {
+		return servico;
 	}
 	
-	public void updateCliente() {
-		for (Cliente cli : clientes) {
-			if(cli.getId() == cliente.getId()) {
-				cli.setEndereco(cliente.getEndereco());
-				cli.setId(cliente.getId());
-				cli.setNome(cliente.getNome());
-				cli.setTelCliente(cliente.getTelCliente());
-			}
-		}
+	public Cliente getEntidade() {
+		return cliente;
 	}
-	public void removeCliente() {
-		for (Cliente cli : clientes) {
-			if(cli.getId() == cliente.getId()) {
-				clientes.remove(cli);
-			}
-		}
+	
+	public void setEntidade(Cliente entidade) {
+		this.cliente = entidade;
 	}
-	public void mostrarCliente() {
-		for (Cliente cli : clientes) {
-			if(cli.getId() == cliente.getId()) {
-				System.out.println(cli);
-			}
-		}
+
+	public void setClientes(Collection<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+	
+	@PostConstruct
+	public void init() {
+		cliente = newEntidade();
+		clientes = getServico().getAll();
+	}
+
+	public void remove(Cliente entidade) {
+		getServico().remove(entidade);
+		limpar();
+	}
+
+	public void save() {
+		getServico().save(cliente);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		clientes = getServico().getAll();
+		cliente = newEntidade();
+	}
+
+	protected Cliente newEntidade() {
+		return new Cliente();
 	}
 
 }

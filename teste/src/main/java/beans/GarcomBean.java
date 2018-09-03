@@ -1,58 +1,79 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import Poo.ed.Almoco;
 import Poo.ed.Garcom;
+import services.AlmocoService;
+import services.GarcomService;
 
 @Named
 @ViewScoped
-public class GarcomBean {
+public class GarcomBean implements Serializable {
 	
-	private Garcom garcom = new Garcom(); 
+	@Inject
+	private GarcomService servico;	
 	
-	private List <Garcom> garcons = new ArrayList<>();
+	private Garcom garcom; 
 	
-	public Garcom getGarcom() {
-		return garcom;
-	}
+	private Collection<Garcom> garcons;
 	
-	public void setGarcom(Garcom garcom) {
-		this.garcom = garcom;
-	}
-	
-	public List<Garcom> getGarcons() {
+	public Collection<Garcom> getGarcons() {
 		return garcons;
 	}
 	
-	public void addGarcom() {
-		garcons.add(getGarcom());
-		garcom = new Garcom();
+	public GarcomService getServico() {
+		return servico;
 	}
-	
-	public void updateBebida() {
-		for (Garcom gar : garcons) {
-			if(gar.getId() == garcom.getId()) {
-				gar.setId(garcom.getId());
-				gar.setNome(garcom.getNome());
-			}
-		}
+
+	public Garcom getEntidade() {
+		return garcom;
 	}
-	public void removeGarcom() {
-		for (Garcom gar : garcons) {
-			if(gar.getId() == garcom.getId()) {
-				garcons.remove(gar);
-			}
-		}
+
+	public void setEntidade(Garcom entidade) {
+		this.garcom = entidade;
 	}
-	public void mostrarGarcom() {
-		for (Garcom gar : garcons) {
-			if(gar.getId() == garcom.getId()) {
-				System.out.println(gar);
-			}
-		}
+
+	public void setGarsons(Collection<Garcom> garcons) {
+		this.garcons = garcons;
+	}
+
+	@PostConstruct
+	public void init() {
+		garcom = newEntidade();
+		garcons = getServico().getAll();
+	}
+
+	public void remove(Garcom entidade) {
+		getServico().remove(entidade);
+		limpar();
+	}
+
+	public void save() {
+		getServico().save(garcom);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		garcons = getServico().getAll();
+		garcom = newEntidade();
+	}
+
+	protected Garcom newEntidade() {
+		return new Garcom();
 	}
 
 }

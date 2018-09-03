@@ -1,59 +1,78 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import Poo.ed.Almoco;
 import Poo.ed.Conta;
+import services.AlmocoService;
 
 @Named
 @ViewScoped
-public class ContaBean {
+public class ContaBean implements Serializable{
 	
-	private Conta conta = new Conta(); 
+	@Inject
+	private ContaService servico;
 	
-	private List <Conta> contas = new ArrayList<>();
+	private Conta conta; 
 	
-	public Conta getConta() {
-		return conta;
-	}
+	private Collection<Conta> contas;
 	
-	public void setConta(Conta conta) {
-		this.conta = conta;
-	}
-	
-	public List<Conta> getContas() {
+	public Collection<Conta> getContas(){
 		return contas;
 	}
 	
-	public void addConta() {
-		contas.add(getConta());
-		conta = new Conta();
+	public ContaService getServico() {
+		return servico;
+	}
+
+	public Conta getEntidade() {
+		return conta;
+	}
+
+	public void setEntidade(Conta entidade) {
+		this.conta = entidade;
+	}
+
+	public void setContas(Collection<Conta> contas) {
+		this.contas = contas;
 	}
 	
-	public void updateConta() {
-		for (Conta con : contas) {
-			if(con.getId() == conta.getId()) {
-				con.setId(conta.getId());
-				con.setPedido(conta.getPedido());
-				con.setValor(conta.getValor());
-			}
-		}
+	@PostConstruct
+	public void init() {
+		conta = newEntidade();
+		contas = getServico().getAll();
 	}
-	public void removeConta() {
-		for (Conta con : contas) {
-			if(con.getId() == conta.getId()) {
-				contas.remove(con);
-			}
-		}
+
+	public void remove(Conta entidade) {
+		getServico().remove(entidade);
+		limpar();
 	}
-	public void mostrarConta() {
-		for (Conta con : contas) {
-			if(con.getId() == conta.getId()) {
-				System.out.println(con);
-			}
-		}
+
+	public void save() {
+		getServico().save(conta);
+		limpar();
+	}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		contas = getServico().getAll();
+		conta = newEntidade();
+	}
+
+	protected Conta newEntidade() {
+		return new Conta();
 	}
 
 }

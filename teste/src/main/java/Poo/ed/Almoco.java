@@ -56,7 +56,6 @@ public class Almoco implements Identificavel{
 	
 	public Almoco() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Almoco(Long id, String nome, float preco, String acompanhamentos, int quantAlmoco) {

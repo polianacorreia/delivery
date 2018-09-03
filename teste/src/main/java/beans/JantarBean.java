@@ -1,60 +1,79 @@
 package beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
+import Poo.ed.Almoco;
 import Poo.ed.Jantar;
+import services.AlmocoService;
+import services.JantarService;
 
 @Named
 @ViewScoped
-public class JantarBean {
+public class JantarBean implements Serializable{
 	
-	private Jantar jantar = new Jantar(); 
+	@Inject
+	private JantarService servico;	
 	
-	private List <Jantar> jantas = new ArrayList<>();
+	private Jantar jantar; 
 	
-	public Jantar getJantar() {
+	private Collection<Jantar> jantares;
+	
+	public Collection<Jantar> getJantares() {
+		return jantares;
+	}
+	
+	public JantarService getServico() {
+		return servico;
+	}
+
+	public Jantar getEntidade() {
 		return jantar;
 	}
-	
-	public void setJantar(Jantar jantar) {
-		this.jantar = jantar;
+
+	public void setEntidade(Jantar entidade) {
+		this.jantar = entidade;
 	}
-	
-	public List<Jantar> getJantas() {
-		return jantas;
+
+	public void setJantares(Collection<Jantar> jantares) {
+		this.jantares = jantares;
 	}
-	
-	public void addJantar() {
-		jantas.add(getJantar());
-		jantar = new Jantar();
+
+	@PostConstruct
+	public void init() {
+		jantar = newEntidade();
+		jantares = getServico().getAll();
 	}
-	
-	public void updateJantar() {
-		for (Jantar jan : jantas) {
-			if(jan.getId() == jantar.getId()) {
-				jan.setAcompanhamentos(jantar.getAcompanhamentos());
-				jan.setId(jantar.getId());
-				jan.setNome(jantar.getNome());
-				jan.setPreco(jantar.getPreco());
-			}
-		}
+
+	public void remove(Jantar entidade) {
+		getServico().remove(entidade);
+		limpar();
 	}
-	public void removeJantar() {
-		for (Jantar jan : jantas) {
-			if(jan.getId() == jantar.getId()) {
-				jantas.remove(jan);
-			}
-		}
+
+	public void save() {
+		getServico().save(jantar);
+		limpar();
 	}
-	public void mostrarJantar() {
-		for (Jantar jan : jantas) {
-			if(jan.getId() == jantar.getId()) {
-				System.out.println(jan);
-			}
-		}
+
+	public void editar(Long id) {
+		this.getEntidade().setId(id);
+		save();
+	}
+
+	public void limpar() {
+		jantares = getServico().getAll();
+		jantar = newEntidade();
+	}
+
+	protected Jantar newEntidade() {
+		return new Jantar();
 	}
 
 }
