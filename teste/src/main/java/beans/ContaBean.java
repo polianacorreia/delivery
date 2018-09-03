@@ -1,18 +1,13 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import Poo.ed.Almoco;
 import Poo.ed.Conta;
-import services.AlmocoService;
 
 @Named
 @ViewScoped
