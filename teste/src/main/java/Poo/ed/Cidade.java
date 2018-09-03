@@ -8,7 +8,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 
-public class Cidade {
+public class Cidade implements Identificavel{
 	
 	@Id
 	@GeneratedValue(generator="cidade_seq", strategy=GenerationType.SEQUENCE)

@@ -7,7 +7,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import DAO.CidadeDAO;
-import Poo.ed.Almoco;
 import Poo.ed.Cidade;
 import util.TransacionalCdi;
 
