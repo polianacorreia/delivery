@@ -8,7 +8,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 
-public class Lanche {
+public class Lanche implements Identificavel{
 
 	@Id
 	@GeneratedValue(generator="lanche_seq", strategy=GenerationType.SEQUENCE)

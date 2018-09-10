@@ -8,7 +8,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 
-public class Sobremesa {
+public class Sobremesa implements Identificavel{
 
 	@Id
 	@GeneratedValue(generator="sobremesa_seq", strategy=GenerationType.SEQUENCE)

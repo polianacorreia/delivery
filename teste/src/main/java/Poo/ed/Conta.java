@@ -8,7 +8,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 
-public class Conta {
+public class Conta implements Identificavel{
 
 
 	@Id

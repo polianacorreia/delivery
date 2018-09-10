@@ -8,7 +8,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 
-public class Garcom {
+public class Garcom implements Identificavel{
 	
 	@Id
 	@GeneratedValue(generator="garcom_seq", strategy=GenerationType.SEQUENCE)

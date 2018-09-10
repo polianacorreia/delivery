@@ -6,14 +6,12 @@ import java.util.List;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import DAO.CidadeDAO;
 import DAO.ClienteDAO;
-import Poo.ed.Cidade;
 import Poo.ed.Cliente;
 import util.TransacionalCdi;
 
 @ApplicationScoped
-public class ClienteService implements Serializable, Service<Cidade>  {
+public class ClienteService implements Serializable, Service<Cliente>  {
 	
 	/**
 	 * 

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Pedidos")
 
-public class Pedido {
+public class Pedido implements Identificavel{
 
 	@Id
 	@GeneratedValue(generator="pedido_seq", strategy=GenerationType.SEQUENCE)

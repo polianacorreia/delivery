@@ -8,7 +8,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 
-public class Jantar {
+public class Jantar implements Identificavel{
 
 	@Id
 	@GeneratedValue(generator="jantar_seq", strategy=GenerationType.SEQUENCE)

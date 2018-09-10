@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 @Table(name="restaurante")
 
-public class Resta {
+public class Resta implements Identificavel{
 	
 	@Id
 	@GeneratedValue(generator="resta_seq", strategy=GenerationType.SEQUENCE)
