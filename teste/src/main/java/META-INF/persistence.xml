@@ -6,6 +6,24 @@
    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 
 	<persistence-unit name="te" transaction-type="RESOURCE_LOCAL">
+	
+	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	<non-jta-data-source>java:/teste</non-jta-data-source>
+	
+	<class>Poo.ed.Almoco</class>
+	<class>Poo.ed.Bebida</class>
+	<class>Poo.ed.Cardapio</class>
+	<class>Poo.ed.Cidade</class>
+	<class>Poo.ed.Cliente</class>
+	<class>Poo.ed.Conta</class>
+	<class>Poo.ed.Entregador</class>
+	<class>Poo.ed.Garcom</class>
+	<class>Poo.ed.Jantar</class>
+	<class>Poo.ed.Lanche</class>
+	<class>Poo.ed.Pedido</class>
+	<class>Poo.ed.Resta</class>
+	<class>Poo.ed.Sobremesa</class>
+	
 		<properties>
 			<!--  Propriedades da conexão com o Banco de Dados -->
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/teste" />
