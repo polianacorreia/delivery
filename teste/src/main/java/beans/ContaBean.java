@@ -36,6 +36,14 @@ public class ContaBean implements Serializable{
 	public void setEntidade(Conta entidade) {
 		this.conta = entidade;
 	}
+	
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta entidade) {
+		this.conta = entidade;
+	}
 
 	public void setContas(Collection<Conta> contas) {
 		this.contas = contas;

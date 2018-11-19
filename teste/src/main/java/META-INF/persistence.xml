@@ -21,12 +21,6 @@
 	<class>Poo.ed.Sobremesa</class>
 	
 		<properties>
-			<!--  Propriedades da conexão com o Banco de Dados -->
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/teste" />
-			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="postgres" />
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-
 			<!-- Propriedades específicas do Hibernate -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.show_sql" value="true" />

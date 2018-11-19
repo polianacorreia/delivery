@@ -33,6 +33,18 @@ public class CidadeBean implements Serializable {
 		return cidade;
 	}
 
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
+
+	public void setServico(CidadeService servico) {
+		this.servico = servico;
+	}
+
 	public void setEntidade(Cidade entidade) {
 		this.cidade = entidade;
 	}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+	<title>Gerenciador de Contas</title>
+</h:head>
+
+
+<h:body>
+	<p:messages />
+
+	<h:form>
+		<h:panelGrid columns="2">
+			<f:facet name="caption">
+				<h:outputText value="Filtros" />
+			</f:facet>
+			<f:facet name="header">
+				<h:outputText value="Pedido" />
+			</f:facet>
+
+			<h:outputLabel value="Pedido: " for="pedidoField" />
+			<h:inputText id="pedidoField" value="#{contaBean.conta.pedido}"
+				label="Pedido" style="width:350px" />
+
+			<h:outputLabel value="Valor: " for="valorField" />
+			<h:inputText id="valorField" value="#{contaBean.conta.valor}"
+				label="Valor" style="width:350px" />
+
+			<h:commandButton id="btnCadastrar" value="Cadastrar"
+				action="#{contaBean.save()}" ajax="false" />
+
+			<h:commandButton id="btnLimpar" value="Limpar"
+				action="#{contaBean.limpar()}" ajax="false" />
+
+		</h:panelGrid>
+	</h:form>
+
+	<h:dataTable id="dataTablesContas" var="cont"
+		value="#{contaBean.contas}" border="1">
+
+		<h:column>
+			<f:facet name="header">Pedido</f:facet>
+			<h:outputText value="#{cont.pedido}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Valor</f:facet>
+			<h:outputText value="#{cont.valor}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Opções</f:facet>
+			<h:commandButton id="btnEditar" value="Editar"
+				action="#{contaBean.editar(cont.id)}" ajax="false" />
+			<h:commandButton id="btnRemover" value="Remover"
+				action="#{contaBean.remove(cont)}" ajax="false" />
+		</h:column>
+
+	</h:dataTable>
+
+
+</h:body>
+
+</html>
