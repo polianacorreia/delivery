@@ -1,4 +1,4 @@
-package beans;
+package services;
 
 import java.util.Collection;
 

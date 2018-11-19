@@ -1,35 +1,65 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
 <h:head>
 	<title>Gerenciador de Cidades</title>
 </h:head>
 
 
 <h:body>
+	<h:messages />
 
-<h:form>
-	
-	Nome: <h:inputText  value="#{cidadeBean.cidade.nome}"></h:inputText> 
-	Cep: <h:inputText  value="#{cidadeBean.cidade.cep}"></h:inputText> 
-	 	
-	<h:commandButton value="Cadastrar" action="#{cidadeBean.addCidade()}" ></h:commandButton>
-	<h:commandButton value="Editar" action="#{cidadeBean.updateCidade()}" ></h:commandButton>
-	<h:commandButton value="Remover" action="#{cidadeBean.removeCidade()}" ></h:commandButton>
-	<h:commandButton value="Mostrar" action="#{cidadeBean.mostrarCidade()}" ></h:commandButton>
+	<h:form>
+		<h:panelGrid columns="2">
+			<f:facet name="caption">
+				<h:outputText value="Filtros" />
+			</f:facet>
+			<f:facet name="header">
+				<h:outputText value="Usuário" />
+			</f:facet>
 
-</h:form>
-<h:dataTable var="cid" value="#{cidadeBean.cidades}">
-	<h:column>
+			<h:outputLabel value="Nome: " for="nomeField" />
+			<h:inputText id="nomeField" value="#{cidadeBean.cidade.nome}"
+				label="Nome" style="width:350px" />
+
+			<h:outputLabel value="CEP: " for="cepField" />
+			<h:inputText id="cepField" value="#{cidadeBean.cidade.cep}"
+				label="CEP" style="width:350px" />
+
+			<h:commandButton id="btnCadastrar" value="Cadastrar"
+				action="#{cidadeBean.save()}" ajax="false" />
+
+			<h:commandButton id="btnLimpar" value="Limpar"
+				action="#{cidadeBean.limpar()}" ajax="false"></h:commandButton>
+
+		</h:panelGrid>
+	</h:form>
+
+	<h:dataTable id="dataTablesCidades" var="cid"
+		value="#{cidadeBean.cidades}" border="1">
+
+		<h:column>
 			<f:facet name="header">Nome</f:facet>
-			<h:outputText value="#{cid.nome}" />	
+			<h:outputText value="#{cid.nome}" />
 		</h:column>
+
 		<h:column>
 			<f:facet name="header">Cep</f:facet>
 			<h:outputText value="#{cid.cep}" />
 		</h:column>
-</h:dataTable>
+
+		<h:column>
+			<f:facet name="header">Opções</f:facet>
+			<h:commandButton id="btnEditar" value="Editar"
+				action="#{cidadeBean.editar(cidade.id)}" ajax="false" />
+			<h:commandButton id="btnRemover" value="Remover"
+				action="#{cidadeBean.remove(cidade)}" ajax="false" />
+		</h:column>
+
+	</h:dataTable>
 
 
 </h:body>
