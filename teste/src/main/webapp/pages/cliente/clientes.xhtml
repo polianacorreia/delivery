@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Gerenciador de Clientes</title>
+</h:head>
+
+<h:body>
+
+	<h:form>
+
+		<h:form id="formMenu">
+			<p:menubar>
+				<f:facet name="options">
+						Olá, #{clienteBean.userLogin}
+						<p:commandButton id="menuItemLogout" value="Logout"
+						icon="fa fa-fw fa-sign-out" action="#{clienteBean.efetuarLogout}"
+						ajax="false" />
+				</f:facet>
+			</p:menubar>
+		</h:form>
+
+		<h:form>
+			<h:panelGrid columns="2">
+				<f:facet name="header">
+					<h:outputText value="Clientes" />
+				</f:facet>
+
+				<h:outputLabel value="Nome: " for="nomeField" />
+				<p:inputText id="nomeField" value="#{clienteBean.entidade.nome}"
+					label="Pedido" style="width:350px" />
+
+				<h:outputLabel value="Telefone: " for="telefoneField" />
+				<p:inputMask id="telefoneField"
+					value="#{clienteBean.entidade.telCliente}" mask="(99) 99999-9999"
+					label="Telefone" style="width:350px" />
+
+				<h:outputLabel value="Endereco: " for="enderecoField" />
+				<p:inputText id="enderecoField"
+					value="#{clienteBean.entidade.endereco}" label="Endereco"
+					style="width:350px" />
+
+				<p:commandButton id="btnCadastrar" value="Cadastrar"
+					action="#{clienteBean.save()}" ajax="false" />
+
+				<p:commandButton id="btnLimpar" value="Limpar"
+					action="#{contaBean.limpar()}" ajax="false" />
+
+			</h:panelGrid>
+		</h:form>
+	</h:form>
+
+	<h:dataTable id="dataTablesClientes" var="cli"
+		value="#{clienteBean.entidades}" border="1">
+
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{cli.nome}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Valor</f:facet>
+			<h:outputText value="#{cli.telCliente}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Endereço</f:facet>
+			<h:outputText value="#{cli.endereco}" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Opções</f:facet>
+			<h:commandButton id="btnEditar" value="Editar"
+				action="#{contaBean.editar(cli.id)}" ajax="false" />
+			<h:commandButton id="btnRemover" value="Remover"
+				action="#{contaBean.remove(cli.entidade)}" ajax="false" />
+		</h:column>
+
+	</h:dataTable>
+</h:body>
+
+</html>

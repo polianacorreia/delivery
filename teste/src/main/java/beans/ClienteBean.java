@@ -1,55 +1,67 @@
 package beans;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.Collection;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import Poo.ed.Almoco;
 import Poo.ed.Cliente;
-import services.AlmocoService;
 import services.ClienteService;
 
 @Named
 @ViewScoped
 public class ClienteBean implements Serializable {
-	
+
 	@Inject
 	private ClienteService servico;
-	
-	private Cliente cliente; 
-	
-	private Collection<Cliente> clientes;
-	
-	public Collection<Cliente> getClientes() {
-		return clientes;
-	}
-	
-	public ClienteService getServico() {
-		return servico;
-	}
-	
-	public Cliente getEntidade() {
-		return cliente;
-	}
-	
-	public void setEntidade(Cliente entidade) {
-		this.cliente = entidade;
+
+	protected Cliente entidade;
+
+	protected Collection<Cliente> entidades;
+
+	public ClienteBean() {
+
 	}
 
-	public void setClientes(Collection<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-	
 	@PostConstruct
 	public void init() {
-		cliente = newEntidade();
-		clientes = getServico().getAll();
+		entidade = newEntidade();
+		entidades = getServico().getAll();
+	}
+
+	public String getUserLogin() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		Principal userPrincipal = externalContext.getUserPrincipal();
+		if (userPrincipal == null) {
+			return "";
+		}
+		return userPrincipal.getName();
+	}
+
+	public void efetuarLogout() throws IOException, ServletException {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		ExternalContext ec = fc.getExternalContext();
+		HttpSession session = (HttpSession) ec.getSession(false);
+		session.invalidate();
+		HttpServletRequest request = (HttpServletRequest) ec.getRequest();
+		request.logout();
+		ec.redirect(ec.getApplicationContextPath());
+	}
+
+	public boolean isUserInRole(String role) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		return externalContext.isUserInRole(role);
 	}
 
 	public void remove(Cliente entidade) {
@@ -57,8 +69,24 @@ public class ClienteBean implements Serializable {
 		limpar();
 	}
 
+	public Cliente getEntidade() {
+		return entidade;
+	}
+
+	public void setEntidade(Cliente entidade) {
+		this.entidade = entidade;
+	}
+
+	public Collection<Cliente> getEntidades() {
+		return entidades;
+	}
+
+	public void setEntidades(Collection<Cliente> entidades) {
+		this.entidades = entidades;
+	}
+
 	public void save() {
-		getServico().save(cliente);
+		getServico().save(entidade);
 		limpar();
 	}
 
@@ -68,12 +96,16 @@ public class ClienteBean implements Serializable {
 	}
 
 	public void limpar() {
-		clientes = getServico().getAll();
-		cliente = newEntidade();
+		entidades = getServico().getAll();
+		entidade = newEntidade();
 	}
 
 	protected Cliente newEntidade() {
 		return new Cliente();
+	}
+
+	public ClienteService getServico() {
+		return servico;
 	}
 
 }
