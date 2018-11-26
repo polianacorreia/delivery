@@ -1,6 +1,8 @@
 package services;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -25,6 +27,7 @@ public class ClienteService implements Serializable, Service<Cliente>  {
 	 */
 	@TransacionalCdi
 	public void save(Cliente user) {
+		user.setPassword(hash(user.getPassword()));
 		userDAO.save(user);
 	}
 
@@ -58,5 +61,16 @@ public class ClienteService implements Serializable, Service<Cliente>  {
 			return userDAO.getAll();
 	}
 		
-
+	private String hash(String password) {
+		try {
+			MessageDigest md;
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(password.getBytes("UTF-8"));
+			byte[] digest = md.digest();
+			String output = Base64.getEncoder().encodeToString(digest);
+			return output;
+		} catch (Exception e) {
+			return password;
+		}
+	}
 }

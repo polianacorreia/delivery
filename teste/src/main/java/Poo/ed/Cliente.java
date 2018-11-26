@@ -15,7 +15,7 @@ public class Cliente implements Identificavel{
 	private Long id;
 	
 	private String nome;
-	private int telCliente;
+	private String telCliente;
 	private String endereco;
 	
 	private String login;
@@ -53,10 +53,10 @@ public class Cliente implements Identificavel{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getTelCliente() {
+	public String getTelCliente() {
 		return telCliente;
 	}
-	public void setTelCliente(int tel_cliente) {
+	public void setTelCliente(String tel_cliente) {
 		this.telCliente = tel_cliente;
 	}
 	public String getEndereco() {
@@ -70,7 +70,7 @@ public class Cliente implements Identificavel{
 		super();
 	}
 	
-	public Cliente(Long id, String nome, int telCliente, String endereco, String login, String password, String grupo) {
+	public Cliente(Long id, String nome, String telCliente, String endereco, String login, String password, String grupo) {
 		super();
 		this.id = id;
 		this.nome = nome;
