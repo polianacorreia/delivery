@@ -18,7 +18,7 @@
 		<param-value>redmond</param-value>
 	</context-param>
 	<welcome-file-list>
-		<welcome-file>/pages/cliente/contas.xhtml</welcome-file>
+		<welcome-file>/pages/cliente/clientes.xhtml</welcome-file>
 	</welcome-file-list>
 	<session-config>
 		<session-timeout>1</session-timeout>
